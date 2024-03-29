@@ -7,7 +7,68 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+main{
+  min-height: 100vh;
+  min-width: 100vw;
+  margin: auto;
+}
+
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+nav a {
+  padding: 5px;
+  text-decoration: none;
+  font-size: large;
+  color: blue;
+}
+
+form > div{
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+}
+
+form > div > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+input{
+  margin: 1em;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin: 1vw auto;
+}
+
+.m-auto{
+  margin: auto;
+}
+
+.alert-success{
+  color: green;
+}
+
+.alert-danger{
+  color: red;
+}
+
+.log-btn {
+  padding: 10px;
+  margin: 10px;
+}
+
+.log-btn a {
+  padding: 5px;
+  text-decoration: none;
+  font-size: large;
+  color: red;
 }

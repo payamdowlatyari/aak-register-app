@@ -1,30 +1,40 @@
-import React, { useState, useEffect } from "react";
-import services from "../services/index";
-import { Panel } from 'primereact/panel';
+import React, { useCallback } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { Navigate, Link } from "react-router-dom";
+import { Panel } from "primereact/panel";
+import { logout } from "../actions/auth";
 
-export default function Home(){
-    const [content, setContent] = useState({});
+export default function Home() {
+  const { isLoggedIn } = useSelector((state) => state.auth);
+  const { user: currentUser } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        const profile = JSON.parse(localStorage.getItem("profile"));
-        setContent(profile)
+  const logOut = useCallback(() => {
+    dispatch(logout());
+  }, [dispatch]);
 
-    }, []);
-    return (
-        <div className="container">
-        <Panel header="Home Page">
-         <div>
-         <p>First Name: {content.first_name}</p>   
-         <p>Last Name: {content.last_name}</p>   
-         <p>User ID: {content.id}</p>   
-         <p>Username: {content.username}</p>   
-         </div>
-         </Panel> 
-         <div className="log-btn">
-            <a href="/login" onClick={services.logout()}>
-                LogOut
-             </a>  
-             </div> 
+  if (!isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
+  return (
+    <div className="container">
+      <Panel header="Home Page">
+        <div>
+          <h2>Welcome {currentUser.first_name}</h2>
         </div>
-    )
+        {currentUser && (
+          <div className="home-links">
+            <div>
+              <Link to={"/Profile"}>Profile</Link>
+            </div>
+            <div>
+              <a href="/login" onClick={logOut}>
+                LogOut
+              </a>
+            </div>
+          </div>
+        )}
+      </Panel>
+    </div>
+  );
 }

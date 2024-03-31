@@ -8,7 +8,7 @@ export default function Home() {
 
   return (
     <div className="container">
-      <Panel header="Home Page">
+      <Panel header="Home">
         {currentUser ? (
           <div>
             <h2>Welcome {currentUser.first_name}!</h2>

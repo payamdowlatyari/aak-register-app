@@ -87,3 +87,18 @@ form button {
   padding: 1em 0;
   width: 100%;
 }
+
+.profile {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile > div {
+  display: flex;
+  flex-direction: row;
+}
+
+.profile > div > div {
+  min-width: 150px;
+  padding: 1em;
+}

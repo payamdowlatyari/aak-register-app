@@ -19,13 +19,11 @@ const login = async (form_data) => {
       "Content-Type": "application/json",
     },
   });
-  console.log(response.data);
 
   if (response.data) {
     localStorage.setItem("token", JSON.stringify(response.data));
-    let userData = await getUser(username);
 
-    return userData;
+    return await getUserByUsername(username);
   }
   return response.data;
 };
@@ -34,12 +32,12 @@ const logout = () => {
   localStorage.removeItem("token");
 };
 
-const getUser = async (username) => {
+const getUserByUsername = async (username) => {
   const response = await axios.get(`${API}/get_user_by_username/${username}`, {
     headers: authHeader(),
   });
   if (response.data) {
-    localStorage.setItem("profile", JSON.stringify(response.data.user));
+    localStorage.setItem("profile", JSON.stringify(response.data));
   }
   return response.data.user;
 };
@@ -48,7 +46,7 @@ const services = {
   register,
   login,
   logout,
-  getUser,
+  getUserByUsername,
 };
 
 export default services;

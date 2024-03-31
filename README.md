@@ -1,10 +1,10 @@
-# A Sign Up form boilerplate for AAK  
+# A Sign Up form boilerplate for AAK
 
-Built with React Redux  
+Built with React Redux
 
 _Live Example: https://aak-register-app.vercel.app/login_
 
-## Clone repo 
+## Clone repo
 
 ### ` git clone https://github.com/payamdowlatyari/aak-register-app.git`
 

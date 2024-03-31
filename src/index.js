@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
+import "primereact/resources/themes/bootstrap4-light-blue/theme.css";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";

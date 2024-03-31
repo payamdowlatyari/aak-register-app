@@ -15,8 +15,6 @@ const initialState = user
 export default function auth(state = initialState, action) {
   const { type, payload } = action;
 
-  console.log(state);
-
   switch (type) {
     case REGISTER_SUCCESS:
       return {

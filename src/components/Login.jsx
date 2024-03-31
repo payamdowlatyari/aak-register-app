@@ -1,44 +1,40 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { login } from "../actions/auth";
 import { Button } from "primereact/button";
 import { InputText } from "primereact/inputtext";
-import { Panel } from "primereact/panel";
+import { Fieldset } from "primereact/fieldset";
+import { Link } from "react-router-dom";
 
 export default function Login() {
   const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.id]: e.target.value });
   };
 
   const { message } = useSelector((state) => state.message);
-  const [loading, setLoading] = useState(false);
   const { isLoggedIn } = useSelector((state) => state.auth);
 
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     setLoading(true);
-    dispatch(login(formData))
-      .then(() => {
-        navigate("/profile");
-      })
-      .catch(() => {
-        setLoading(false);
-      });
+    dispatch(login(formData));
+    setLoading(false);
   };
 
   if (isLoggedIn) {
-    return <Navigate to="/profile" replace={true} />;
+    return <Navigate to="/" replace={true} />;
   }
 
   return (
     <div className="container m-auto">
-      <Panel header="Login">
+      <Fieldset legend="Login">
         <form onSubmit={handleSubmit}>
           <div>
             <div>
@@ -60,7 +56,11 @@ export default function Login() {
               />
             </div>
             <div>
-              <Button label="Login" disabled={loading} />
+              <Button label="Login" disabled={loading} raised />
+            </div>
+            <div>
+              <span>Don't have an account? </span>
+              <Link to={"/register"}>Register</Link>
             </div>
           </div>
 
@@ -70,7 +70,7 @@ export default function Login() {
             </div>
           )}
         </form>
-      </Panel>
+      </Fieldset>
     </div>
   );
 }
